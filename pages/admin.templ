@@ -8,7 +8,7 @@ import (
 
 templ Admin(list []string) {
 	@layouts.Base() {
-		<div class="flex w-full justify-center">
+		<div class="flex w-full justify-center" data-signals-_showme="-1" data-on-keydown__window="evt.key === 'Escape' && ($_showme = -1)">
 			<table class="bold table-auto text-left text-2xl text-neutral-200">
 				<thead class="bold border text-xl uppercase text-neutral-200">
 					<tr>
@@ -20,15 +20,15 @@ templ Admin(list []string) {
 				</thead>
 				for i, v := range list {
 					{{ i++ }}
-					<tbody data-signals={ fmt.Sprintf("{%d:false}", i) }>
+					<tbody>
 						<tr class="border">
 							<td class="border px-4 py-2 text-center">{ i }</td>
 							<td class="border px-4 py-2 text-center">{ strings.ToUpper(v) }</td>
 							<td class="border px-4 py-2 text-center">
-								<button data-on-click={ fmt.Sprintf("$%d = !$%d", i, i) } class="cursor-pointer text-center" data-show={ fmt.Sprintf("!$%d", i) }>
+								<button data-on-click={ fmt.Sprintf("$_showme = %d", i) } class="cursor-pointer text-center" data-show={ fmt.Sprintf("$showme != %d", i) }>
 									<svg xmlns="http://www.w3.org/2000/svg" height="48px" viewBox="0 -960 960 960" width="48px" fill="#e2e8f0"><path d="M200-400v-80h80v80h-80Zm-80-80v-80h80v80h-80Zm360-280v-80h80v80h-80ZM170-650h140v-140H170v140Zm-50 50v-240h240v240H120Zm50 430h140v-140H170v140Zm-50 50v-240h240v240H120Zm530-530h140v-140H650v140Zm-50 50v-240h240v240H600ZM360-400v-80h-80v-80h160v160h-80Zm40-200v-160h80v80h80v80H400Zm-190-90v-60h60v60h-60Zm0 480v-60h60v60h-60Zm480-480v-60h60v60h-60Zm-40 570v-130H520v-60h130v-130h60v130h130v60H710v130h-60Z"></path></svg>
 								</button>
-								<button class="absolute inset-0 flex h-screen items-center justify-center" data-on-click={ fmt.Sprintf("$%d = !$%d", i, i) } data-show={ fmt.Sprintf("$%d", i) } class="cursor-pointer">
+								<button class="absolute inset-0 flex h-screen items-center justify-center" data-on-click={ fmt.Sprintf("$_showme = %d", i) } data-show={ fmt.Sprintf("$_showme==%d", i) } class="cursor-pointer">
 									<div class="flex-col items-center justify-between border-2 border-neutral-200 bg-neutral-900 p-4">
 										<span class="text-center text-4xl font-bold text-neutral-200">{ strings.ToUpper(v) }</span>
 										<img src={ "qr/" + v + ".jpeg" } width="256" alt={ v }/>
