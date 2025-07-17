@@ -1,0 +1,7 @@
+requires templ
+
+just run command: make
+
+runs on port :3000
+
+running datastar rc2, I've included rc1 commented out in layouts.
